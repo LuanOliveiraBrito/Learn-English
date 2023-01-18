@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Frase } from '../shared/frase.model';
 import { frases } from './frases-mock';
 
@@ -14,7 +14,9 @@ export class PainelComponent {
   public rodada: number = 0;
   public rodadaFrase!: Frase;
   public progresso: number = 0;
-  public tentativas : number = 3;
+  public tentativas: number = 3;
+
+  @Output() public encerrarJogo : EventEmitter<string> = new EventEmitter();
 
   constructor() {
     this.atualizaRodada();
@@ -33,12 +35,15 @@ export class PainelComponent {
       alert('A tradução está correta');
       this.rodada++;
       this.progresso = this.progresso + 100 / this.frases.length;
+      if (this.rodada === 4) {
+        this.encerrarJogo.emit('vitoria')
+      }
       this.atualizaRodada();
     } else {
       alert('A tradução está incorreta');
-      this.tentativas--
+      this.tentativas--;
       if (this.tentativas === -1) {
-        alert('Você perdeu todas as tentativas')
+        this.encerrarJogo.emit('derrota')
       }
     }
   }

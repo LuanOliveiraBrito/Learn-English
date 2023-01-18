@@ -3,8 +3,14 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Luan';
+  jogoEmAndamento : boolean = true
+  tipoEncerramento : string | undefined
+
+  encerrarJogo(tipo: string): void {
+    this.jogoEmAndamento = false
+    this.tipoEncerramento = tipo
+  }
 }

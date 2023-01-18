@@ -19,6 +19,7 @@ export class TentativasComponent implements OnInit, OnChanges {
   constructor() {
 
   }
+  
   ngOnChanges(): void {
     if (this.tentativas !== this.coracoes.length) {
       let indice = this.coracoes.length - this.tentativas
